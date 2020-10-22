@@ -8,6 +8,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class Characteristic {
 
     @Id
