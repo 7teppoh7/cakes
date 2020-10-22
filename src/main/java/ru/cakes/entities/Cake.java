@@ -2,7 +2,8 @@ package ru.cakes.entities;
 
 import lombok.*;
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -24,9 +25,9 @@ public class Cake {
     private CakeBase cakeBase;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private Collection<Decoration> decorations;
+    private Set<Decoration> decorations = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private Collection<Characteristic> characteristics;
+    private Set<Characteristic> characteristics = new HashSet<>();
 
 }

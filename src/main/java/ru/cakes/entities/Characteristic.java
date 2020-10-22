@@ -2,7 +2,8 @@ package ru.cakes.entities;
 
 import lombok.*;
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -18,8 +19,8 @@ public class Characteristic {
     private String subscription;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    private Collection<Decoration> decorations;
+    private Set<Decoration> decorations = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
-    private Collection<Cake> cakes;
+    private Set<Cake> cakes = new HashSet<>();
 }

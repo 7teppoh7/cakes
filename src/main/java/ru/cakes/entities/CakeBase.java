@@ -2,7 +2,8 @@ package ru.cakes.entities;
 
 import lombok.*;
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -16,6 +17,6 @@ public class CakeBase { //TODO: Enum?
     private String name;
 
     @OneToMany(fetch = FetchType.LAZY)
-    private Collection<Cake> cakes;
+    private Set<Cake> cakes = new HashSet<>();
 
 }
