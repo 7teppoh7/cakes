@@ -8,7 +8,8 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CakeBase { //TODO: Enum?
+@Entity
+public class CakeBase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
