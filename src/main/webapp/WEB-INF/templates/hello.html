@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Выбор пользователя</title>
+</head>
+<body style="font-size: large;">
+<th:block th:if="${!customers.isEmpty()}">
+    <h1>Выберете пользователя </h1>
+    <table style="border: 2px solid black; border-collapse: separate; border-spacing: 10px; width: 500px">
+        <thread>
+            <tr>
+                <th>id</th>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th></th>
+            </tr>
+        </thread>
+        <tbody>
+        <tr th:each="customer, index : ${customers}">
+            <td th:text="${customer.id}"></td>
+            <td th:text="${customer.firstName}"></td>
+            <td th:text="${customer.lastName}"></td>
+            <td><a th:href="@{${'/' + customer.id}}">Выбрать</a></td>
+        </tr>
+        </tbody>
+    </table>
+</th:block>
+<hr/>
+<h1>Создать пользователя</h1>
+<th:block th:if="${error}"><h3 th:text="${error}"></h3></th:block>
+<form method="post" th:action="@{/}">
+    <div>
+        <label for="inputFirstName">Имя пользователя</label>
+        <input type="text" id="inputFirstName" name="firstName" placeholder="Имя" required
+               autofocus>
+    </div>
+    <p></p>
+    <div>
+        <label for="inputLastName">Фамилия пользователя</label>
+        <input type="text" id="inputLastName" name="lastName" placeholder="Фамилия" required>
+    </div>
+    <p></p>
+    <div>
+        <button type="submit">Создать</button>
+    </div>
+    <hr/>
+</form>
+</body>
+</html>
