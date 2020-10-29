@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Создание торта</title>
+</head>
+<body style="font-size: large;">
+<h1>Создание торта с нуля</h1>
+<form method="post" th:action="@{'/' + ${customer.id} + '/' + 'create' }">
+    <div>
+        <label for="cakeName">Название торта</label>
+        <input type="text" id="cakeName" name="name" placeholder="Название" required
+               autofocus>
+    </div>
+    <p></p>
+    <div>
+        <h5>Основание торта</h5>
+        <div th:each="cakeBase : ${cakeBases}">
+            <label for="cakeBase" th:text="${cakeBase.name}"></label>
+            <input type="radio" id="cakeBase" name="cakeBase" placeholder="Основание торта" th:value="${cakeBase.id}" required>
+        </div>
+    </div>
+    <p></p>
+    <div>
+        <h5>Украшения торта</h5>
+        <div th:each="dec : ${decorations}">
+            <label for="decorations" th:text="${dec.name}"></label>
+            <input type="checkbox" id="decorations" name="decorations" placeholder="Декорации торта" th:value="${dec.id}">
+        </div>
+    </div>
+    <p></p>
+    <div>
+        <h5>Характеристики торта</h5>
+        <div th:each="cha : ${characteristics}">
+            <label for="characteristics" th:text="${cha.name}"></label>
+            <input type="checkbox" id="characteristics" name="characteristics" placeholder="Характеристики торта" th:value="${cha.id}">
+        </div>
+    </div>
+    <p></p>
+    <div>
+        <button type="submit">Рассчитать</button>
+    </div>
+</form>
+<hr/>
+<h1>Выбор уже существующих тортов</h1>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Торты пользователя</title>
+    <style>
+        table{
+            border: 3px solid black;
+        }
+        th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body style="font-size: large;">
+<th:block th:if="${!cakes.isEmpty()}">
+    <h1 th:text="'Торты пользователя ' + ${customer.firstName} + ' ' + ${customer.lastName} + ' (ID ' + ${customer.id} + ')'"></h1>
+    <table style="border: 2px solid black; border-collapse: separate; width: 1500px; text-align: center;">
+        <thread>
+            <tr>
+                <th>id торта</th>
+                <th>Имя торта</th>
+                <th>Цена торта</th>
+                <th>Основа торта</th>
+                <th>Декорации торта</th>
+                <th>Характеристики торта</th>
+            </tr>
+        </thread>
+        <tbody>
+        <tr th:each="cake : ${cakes}">
+            <td th:text="${cake.id}"></td>
+            <td th:text="${cake.name}"></td>
+            <td th:text="${cake.price}"></td>
+            <td th:text="${cake.cakeBase.name}"></td>
+            <td>
+                <div th:each="dec, index : ${cake.decorations}">
+                    <div style="display: inline-block" th:text="${index.count} + '. ' + ${dec.name}"></div>
+                    <b style="display: inline-block" th:text="${dec.price}"></b>
+                    <a th:href="@{'/decoration/' + ${dec.id}}">Подробнее</a>
+                </div>
+            </td>
+            <td>
+                <div th:each="cha, index : ${cake.characteristics}">
+                    <div style="display: inline-block" th:text="${index} + '. ' + ${cha.name}"></div>
+                    <a th:href="@{'/characteristic/' + ${cha.id}}">Подробнее</a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</th:block>
+<hr/>
+<a th:href="@{'/' + ${customer.id} + '/create'}">Заказать торт</a>
+</body>
+</html>
