@@ -17,7 +17,13 @@ public class CakeBase {
 
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "cakeBase")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private Set<Cake> cakes = new HashSet<>();
+
+    public CakeBase(String name){
+        this.name = name;
+    }
 
 }

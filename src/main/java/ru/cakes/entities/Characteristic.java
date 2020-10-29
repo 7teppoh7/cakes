@@ -20,8 +20,14 @@ public class Characteristic {
     private String subscription;
 
     @ManyToMany(fetch = FetchType.LAZY)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private Set<Decoration> decorations = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private Set<Cake> cakes = new HashSet<>();
+
+
 }

@@ -19,7 +19,9 @@ public class Customer {
 
     private String firstName;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private Set<Cake> cakes = new HashSet<>();
 
 }

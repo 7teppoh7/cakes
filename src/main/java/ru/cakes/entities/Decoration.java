@@ -20,9 +20,17 @@ public class Decoration {
     private Float price;
 
     @ManyToMany(fetch = FetchType.LAZY)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private Set<Characteristic> characteristics = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private Set<Cake> cakes = new HashSet<>();
 
+    public Decoration(String name, Float price) {
+        this.name = name;
+        this.price = price;
+    }
 }
