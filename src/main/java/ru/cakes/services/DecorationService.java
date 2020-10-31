@@ -13,7 +13,7 @@ public class DecorationService {
         this.decorationRepository = decorationRepository;
     }
 
-    public Decoration findByName(String name){
+    public Decoration findByName(String name) {
         return decorationRepository.findByName(name);
     }
 
@@ -23,5 +23,13 @@ public class DecorationService {
 
     public Iterable<Decoration> findAll() {
         return decorationRepository.findAll();
+    }
+
+    public Decoration findById(Integer id) {
+        return decorationRepository.findById(id).orElse(null);
+    }
+
+    public Integer countDecoration(Integer id){
+        return decorationRepository.countById(id);
     }
 }

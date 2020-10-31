@@ -17,4 +17,11 @@ public class CharacteristicService {
         return characteristicRepository.findAll();
     }
 
+    public Characteristic findById(Integer id) {
+        return characteristicRepository.findById(id).orElse(null);
+    }
+
+    public Integer countCharacteristic(Integer id){
+        return characteristicRepository.countById(id);
+    }
 }

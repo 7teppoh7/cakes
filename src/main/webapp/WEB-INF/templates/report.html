@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'Отчёт: ' + ${reportName}"></title>
+    <style>
+        table {
+            border: 3px solid black;
+            border-collapse: separate;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body style="font-size: large;">
+<table style="border: 2px solid black; border-collapse: separate; width: auto; text-align: center;">
+    <thread>
+        <tr>
+            <th>Позиция</th>
+            <th>id</th>
+            <th th:text="${reportName}"></th>
+            <th>Популярность</th>
+        </tr>
+    </thread>
+    <tbody>
+    <tr th:each="item, index : ${reportItems}">
+        <td th:text="${index.count}"></td>
+        <td th:text="${item.id}"></td>
+        <td th:text="${item.name}"></td>
+        <td th:text="${item.popularity}"></td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/report}">Назад</a>
+</body>

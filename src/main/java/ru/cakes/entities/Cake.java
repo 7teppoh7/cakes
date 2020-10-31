@@ -5,9 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Data
@@ -31,10 +29,7 @@ public class Cake {
     private CakeBase cakeBase;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "cake_decoration",
-            joinColumns = @JoinColumn(name = "cake_id"),
-            inverseJoinColumns = @JoinColumn(name = "decorations_id"))
-    private List<Decoration> decorations = new ArrayList<>();
+    private Set<Decoration> decorations = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Characteristic> characteristics = new HashSet<>();

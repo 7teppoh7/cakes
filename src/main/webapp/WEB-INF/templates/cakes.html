@@ -4,18 +4,19 @@
     <meta charset="UTF-8">
     <title>Торты пользователя</title>
     <style>
-        table{
+        table {
             border: 3px solid black;
         }
+
         th, td {
             border: 1px solid black;
         }
     </style>
 </head>
 <body style="font-size: large;">
+<h1 th:text="'Торты пользователя ' + ${customer.firstName} + ' ' + ${customer.lastName} + ' (ID ' + ${customer.id} + ')'"></h1>
 <th:block th:if="${!cakes.isEmpty()}">
-    <h1 th:text="'Торты пользователя ' + ${customer.firstName} + ' ' + ${customer.lastName} + ' (ID ' + ${customer.id} + ')'"></h1>
-    <table style="border: 2px solid black; border-collapse: separate; width: 1500px; text-align: center;">
+    <table style="border: 2px solid black; border-collapse: separate; width: auto; text-align: center;">
         <thread>
             <tr>
                 <th>id торта</th>
@@ -41,8 +42,10 @@
             </td>
             <td>
                 <div th:each="cha, index : ${cake.characteristics}">
-                    <div style="display: inline-block" th:text="${index} + '. ' + ${cha.name}"></div>
-                    <a th:href="@{'/characteristic/' + ${cha.id}}">Подробнее</a>
+                    <b style="display: inline-block" th:text="${index.count} + '. '"></b>
+                    <div style="display: inline-block" th:text="${cha.name}"></div>
+                    <i th:text="'(' + ${cha.subscription} + ')'"></i>
+                    <a style="display: block" th:href="@{'/characteristic/' + ${cha.id}}">Подробнее</a>
                 </div>
             </td>
         </tr>
@@ -51,5 +54,9 @@
 </th:block>
 <hr/>
 <a th:href="@{'/' + ${customer.id} + '/create'}">Заказать торт</a>
+<p></p>
+<a th:href="@{'/' + ${customer.id} + '/decorate'}">Заказать торт (декоратор)</a>
+<hr/>
+<a th:href="@{/}">Назад</a>
 </body>
 </html>

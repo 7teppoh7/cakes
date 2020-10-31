@@ -20,4 +20,12 @@ public class CakeBaseService {
     public CakeBase save(CakeBase cakeBase) {
         return cakeBaseRepository.save(cakeBase);
     }
+
+    public CakeBase findById(Integer id) {
+        return cakeBaseRepository.findById(id).orElse(null);
+    }
+
+    public Iterable<CakeBase> findAll() {
+        return cakeBaseRepository.findAll();
+    }
 }

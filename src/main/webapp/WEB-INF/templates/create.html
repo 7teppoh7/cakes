@@ -3,10 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Создание торта</title>
+    <style>
+        table {
+            border: 3px solid black;
+        }
+
+        th, td {
+            border: 1px solid black;
+        }
+    </style>
 </head>
 <body style="font-size: large;">
 <h1>Создание торта с нуля</h1>
-<form method="post" th:action="@{'/' + ${customer.id} + '/' + 'create' }">
+<form method="post"  th:action="@{'/' + ${customer.id} + '/' + 'create' }">
     <div>
         <label for="cakeName">Название торта</label>
         <input type="text" id="cakeName" name="name" placeholder="Название" required
@@ -14,26 +23,29 @@
     </div>
     <p></p>
     <div>
-        <h5>Основание торта</h5>
+        <h3>Основание торта (500)</h3>
         <div th:each="cakeBase : ${cakeBases}">
             <label for="cakeBase" th:text="${cakeBase.name}"></label>
-            <input type="radio" id="cakeBase" name="cakeBase" placeholder="Основание торта" th:value="${cakeBase.id}" required>
+            <input type="radio" id="cakeBase" name="cakeBase" placeholder="Основание торта" th:value="${cakeBase.id}"
+                   required>
         </div>
     </div>
     <p></p>
     <div>
-        <h5>Украшения торта</h5>
+        <h3>Украшения торта</h3>
         <div th:each="dec : ${decorations}">
-            <label for="decorations" th:text="${dec.name}"></label>
-            <input type="checkbox" id="decorations" name="decorations" placeholder="Декорации торта" th:value="${dec.id}">
+            <label for="decorations" th:text="${dec.name} + ' (' + ${dec.price} + ')'"></label>
+            <input type="checkbox" id="decorations" name="decorations" placeholder="Декорации торта"
+                   th:value="${dec.id}">
         </div>
     </div>
     <p></p>
     <div>
-        <h5>Характеристики торта</h5>
+        <h3>Характеристики торта</h3>
         <div th:each="cha : ${characteristics}">
             <label for="characteristics" th:text="${cha.name}"></label>
-            <input type="checkbox" id="characteristics" name="characteristics" placeholder="Характеристики торта" th:value="${cha.id}">
+            <input type="checkbox" id="characteristics" name="characteristics" placeholder="Характеристики торта"
+                   th:value="${cha.id}">
         </div>
     </div>
     <p></p>
@@ -43,5 +55,61 @@
 </form>
 <hr/>
 <h1>Выбор уже существующих тортов</h1>
+<table style="border: 2px solid black; border-collapse: separate; width: auto; text-align: center;">
+    <thread>
+        <tr>
+            <th>id</th>
+            <th>Имя</th>
+            <th>Цена</th>
+            <th>Основа</th>
+            <th>Декорации</th>
+            <th>Характеристики</th>
+            <th>Создатель</th>
+            <th></th>
+        </tr>
+    </thread>
+    <tbody>
+    <tr th:each="cake : ${cakesAll}">
+        <td th:text="${cake.id}"></td>
+        <td th:text="${cake.name}"></td>
+        <td th:text="${cake.price}"></td>
+        <td th:text="${cake.cakeBase.name}"></td>
+        <td>
+            <div th:each="dec, index : ${cake.decorations}">
+                <div style="display: inline-block" th:text="${index.count} + '. ' + ${dec.name}"></div>
+                <b style="display: inline-block" th:text="${dec.price}"></b>
+                <a th:href="@{'/decoration/' + ${dec.id}}">Подробнее</a>
+            </div>
+        </td>
+        <td>
+            <div th:each="cha, index : ${cake.characteristics}">
+                <b style="display: inline-block" th:text="${index.count} + '. '"></b>
+                <div style="display: inline-block" th:text="${cha.name}"></div>
+                <i th:text="'(' + ${cha.subscription} + ')'"></i>
+                <a style="display: block" th:href="@{'/characteristic/' + ${cha.id}}">Подробнее</a>
+            </div>
+        </td>
+        <td>
+            <div th:text="${cake.customer.firstName} + ' ' + ${cake.customer.lastName} + ' (ID ' + ${cake.customer.id} + ')'"></div>
+        </td>
+        <td>
+            <form method="post" th:action="@{'/' + ${customer.id} + '/' + 'create' }">
+                <input type="hidden" name="name" th:value="${cake.name}">
+                <input type="hidden" name="cakeBase" th:value="${cake.cakeBase.id}">
+                <th:block th:each="dec : ${cake.decorations}">
+                    <input type="hidden" name="decorations" th:value="${dec.id}">
+                </th:block>
+                <th:block th:each="cha : ${cake.characteristics}">
+                    <input type="hidden" name="characteristics" th:value="${cha.id}">
+                </th:block>
+                <div>
+                    <button type="submit">Выбрать</button>
+                </div>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{'/'+ ${customer.id}}">Назад</a>
 </body>
 </html>
