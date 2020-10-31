@@ -25,8 +25,8 @@ public class KorzhCakeBase extends AbstractCakeDecorator {
     @Override
     public void decorate() {
         Cake cake = super.getCake();
-        CakeBase cakeBase = cakeBaseService.findByName("Korzh");
-        if (cakeBase == null) cakeBase = cakeBaseService.save(new CakeBase("Korzh"));
+        CakeBase cakeBase = cakeBaseService.findByName("Корж");
+        if (cakeBase == null) cakeBase = cakeBaseService.save(new CakeBase("Корж"));
         cake.setCakeBase(cakeBase);
         super.decorate();
     }

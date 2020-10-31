@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Покупка торта</title>
+    <style>
+        table {
+            border: 3px solid black;
+        }
+
+        th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body style="font-size: large;">
+<h1>Ваш торт:</h1>
+<table>
+    <thread>
+        <tr>
+            <th><h4>Имя</h4></th>
+            <th><h4>Основание</h4></th>
+            <th><h4>Декорации</h4></th>
+            <th><h4>Характеристики</h4></th>
+        </tr>
+    </thread>
+    <tbody>
+    <tr>
+        <td>
+            <div th:text="${cake.name}"></div>
+        </td>
+        <td>
+            <div th:text="${cake.cakeBase.name}"></div>
+        </td>
+        <td>
+            <div th:each="dec, index : ${cake.decorations}">
+                <div style="display: inline-block" th:text="${index.count} + '. ' + ${dec.name}"></div>
+                <b style="display: inline-block" th:text="${dec.price}"></b>
+                <a th:href="@{'/decoration/' + ${dec.id}}">Подробнее</a>
+            </div>
+            <th:block th:unless="${!cake.characteristics.isEmpty()}">
+                <div>Без декорации</div>
+            </th:block>
+        </td>
+        <td>
+            <div th:each="cha, index : ${cake.characteristics}">
+                <b style="display: inline-block" th:text="${index.count} + '. '"></b>
+                <div style="display: inline-block" th:text="${cha.name}"></div>
+                <i th:text="'(' + ${cha.subscription} + ')'"></i>
+                <a style="display: block" th:href="@{'/characteristic/' + ${cha.id}}">Подробнее</a>
+            </div>
+            <th:block th:unless="${!cake.characteristics.isEmpty()}">
+                <div>Без характеристик</div>
+            </th:block>
+        </td>
+</table>
+<p></p>
+<h3 style="display: inline-block">Цена:  </h3>
+<div style="display:inline-block;" th:text="${cake.price}"></div>
+<hr>
+<form method="post" th:action="@{'/' + ${customer.id} + '/' + 'create' }">
+    <input type="hidden" name="name" th:value="${cake.name}">
+    <input type="hidden" name="cakeBase" th:value="${cake.cakeBase.id}">
+    <th:block th:each="dec : ${cake.decorations}">
+        <input type="hidden" name="decorations" th:value="${dec.id}">
+    </th:block>
+    <th:block th:each="cha : ${cake.characteristics}">
+        <input type="hidden" name="characteristics" th:value="${cha.id}">
+    </th:block>
+    <div>
+        <button type="submit" name="agree" value="true">Купить</button>
+        <button type="submit" name="agree" value="false">Отмена</button>
+    </div>
+</form>
+</body>
+</html>

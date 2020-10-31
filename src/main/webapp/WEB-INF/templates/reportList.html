@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Отчётность</title>
+</head>
+<body style="font-size: large;">
+<h2>Выберите отчётность: </h2>
+<hr/>
+<a th:href="@{/report/topDecorations}">Популярность декораций</a>
+<hr/>
+<a th:href="@{/report/topCharacteristics}">Популярность характеристик</a>
+<hr/>
+<a th:href="@{/report/topCakeBases}">Популярность основ тортов</a>
+<hr/>
+<a th:href="@{/report/topCustomers}">Активность покупателей</a>
+<hr/>
+<a th:href="@{/}">Назад</a>
+</body>
+</html>

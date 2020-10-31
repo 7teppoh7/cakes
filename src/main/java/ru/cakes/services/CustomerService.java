@@ -1,12 +1,8 @@
 package ru.cakes.services;
 
 import org.springframework.stereotype.Service;
-import ru.cakes.entities.Cake;
 import ru.cakes.entities.Customer;
 import ru.cakes.repositories.CustomerRepository;
-
-import javax.transaction.Transactional;
-import java.util.Set;
 
 @Service
 public class CustomerService {
@@ -30,7 +26,7 @@ public class CustomerService {
     }
 
     public Customer findById(Integer customerId) {
-        return customerRepository.findById(customerId).get();
+        return customerRepository.findById(customerId).orElse(null);
     }
 
 }

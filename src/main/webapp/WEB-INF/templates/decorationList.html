@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Создание торта</title>
+    <style>
+        table {
+            border: 3px solid black;
+        }
+
+        th, td {
+            border: 1px solid black;
+        }
+        a{
+            display: block;
+        }
+        h4{
+            display: inline-block;
+        }
+    </style>
+</head>
+<body style="font-size: large;">
+<h3>Ваш торт:</h3>
+<th:block th:if="${name}">
+    <h4>Имя: </h4>
+    <div th:text="${name}"></div>
+</th:block>
+<th:block th:if="${korzhCakeBase}">Коржевая основа (500)</th:block>
+<th:block th:if="${cherryDecoration}">Вишня (50)</th:block>
+<th:block th:if="${candleDecoration}">Свеча (25)</th:block>
+<p></p>
+<hr/>
+<th:block th:if="${name == null}">
+    <form method="get" th:action="@{'/' + ${customer.id} + '/decorate/name' }">
+        <label> Введите имя торта
+            <input type="text" name="value"/>
+        </label>
+        <input type="submit" value="Подтвердить">
+    </form>
+</th:block>
+<th:block th:if="${korzhCakeBase == null}">
+    <a th:href="@{'/' + ${customer.id} + '/decorate/korzhCakeBase' }">Коржевая основа (500)</a>
+</th:block>
+<th:block th:if="${cherryDecoration == null}">
+    <a th:href="@{'/' + ${customer.id} + '/decorate/cherryDecoration' }">Добавить вишню (50)</a>
+</th:block>
+<th:block th:if="${candleDecoration == null}">
+    <a th:href="@{'/' + ${customer.id} + '/decorate/candleDecoration' }">Добавить свечи (25)</a>
+</th:block>
+
+<form method="get" th:action="@{'/'+ ${customer.id} + '/decorate'}">
+    <input type="hidden" name="create" value="true">
+    <input type="submit" value="Рассчитать">
+</form>
+<form method="get" th:action="@{'/'+ ${customer.id} + '/decorate'}">
+    <input type="hidden" name="create" value="false">
+    <input type="submit" value="Очистить">
+</form>
+<a th:href="@{'/'+ ${customer.id}}">Назад</a>
+</body>
+</html>
